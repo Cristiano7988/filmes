@@ -1,12 +1,14 @@
 import FilmesBar from './components/FilmesBar'
 import './App.css';
+import FilmesList from './components/FilmesList';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <FilmesBar />
-      </header>
+      <FilmesBar />
+      <main>
+        <FilmesList />
+      </main>
     </div>
   );
 }
