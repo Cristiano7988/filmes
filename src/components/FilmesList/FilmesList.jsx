@@ -25,8 +25,11 @@ const FilmesList = () => {
     const classes = useStyles();
     const getFilmes = async () => {
         await fetch(`https://api.themoviedb.org/3/trending/movies/week?api_key=ca93225bc497b838281c58ea1888314f`)
-          .then(r => r.json() ) 
-          .then(filmes => setFilmes(filmes));
+            .then(r => r.json() ) 
+            .then(filmes => {
+                filmes.results.sort((a,b)=> b.vote_average - a.vote_average)
+                setFilmes(filmes);
+            });
       }
     const [filmes, setFilmes] = useState(getFilmes);
 
