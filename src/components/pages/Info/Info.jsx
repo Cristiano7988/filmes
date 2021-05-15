@@ -1,5 +1,6 @@
 import { Card, makeStyles } from "@material-ui/core";
 import { useContext } from "react";
+import { Redirect } from "react-router";
 import FilmeContext from "../../../contexts/FilmeContext";
 import useInfoFilme from "../../../hooks/usoInfo";
 
@@ -26,7 +27,7 @@ const Info = () => {
     const infoFilme = useInfoFilme(contexto)[0];
     const { name, title, poster_path, backdrop_path, overview, media_type, release_date, first_air_date, vote_average } = infoFilme.filme;
 
-    return <div>
+    return infoFilme.filme ? <div>
         <Card className={classes.containerFilme} style={{backgroundImage: `url(https://www.themoviedb.org/t/p/w600_and_h900_bestv2${backdrop_path})`}}>
             <img src={`https://www.themoviedb.org/t/p/w440_and_h660_bestv2${poster_path}`} alt="poster" />
             <div className={classes.info}>
@@ -41,7 +42,7 @@ const Info = () => {
                 </div>
             </div>
         </Card>
-    </div>
+    </div> : <Redirect to="/" />
 }
 
 export default Info;
