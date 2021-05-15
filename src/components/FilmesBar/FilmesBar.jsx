@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-const FilmesBar = () => {
+
+const FilmesBar = ({ onChange }) => {
     const classes = useStyles();
     return (
         <AppBar position="static">
@@ -63,6 +64,7 @@ const FilmesBar = () => {
                             input: classes.inputInput,
                         }}
                         inputProps={{ 'aria-label': 'search' }}
+                        onChange={onChange}
                     />
                 </div>
             </Toolbar>

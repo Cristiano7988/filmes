@@ -51,21 +51,12 @@ const trataData = (data) => {
 
 const FilmesList = () => {
     const classes = useStyles();
-    const getFilmes = async () => {
-        await fetch(`https://api.themoviedb.org/3/trending/movies/week?api_key=ca93225bc497b838281c58ea1888314f`)
-            .then(r => r.json() ) 
-            .then(filmes => {
-                filmes.results.sort((a,b)=> b.vote_average - a.vote_average)
-                setFilmes(filmes);
-            });
-      }
-    const [filmes, setFilmes] = useState(getFilmes);
     const contexto = useContext(FilmeContext);
     const salvaFilme = useInfoFilme(contexto)[1];
 
     return (
         <div className={classes.cardContainer}>
-            {filmes.results && filmes.results.map( filme => {
+            {contexto.filmes && contexto.filmes.results.map( filme => {
                 const {title, name, release_date, first_air_date, id, poster_path, vote_average} = filme;
                 let data = trataData(release_date || first_air_date)
 
