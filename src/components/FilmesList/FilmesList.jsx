@@ -1,9 +1,10 @@
 import { Card, makeStyles } from "@material-ui/core";
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import FilmeContext from "../../contexts/FilmeContext";
 import useInfoFilme from "../../hooks/usoInfo";
+import img from "../../img/img-icon.png";
 
 const useStyles = makeStyles(theme => ({
     cardContainer: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles(theme => ({
         boxShadow: '2px 1px 3px',
         alignItems: 'center',
         display: 'flex',
-        minHeight: '80px'
+        minHeight: '225px'
     },
     info: {
         width: '130px',
@@ -58,15 +59,18 @@ const FilmesList = () => {
         <div className={classes.cardContainer}>
             {contexto.filmes && contexto.filmes.results.map( filme => {
                 const {title, name, release_date, first_air_date, id, poster_path, vote_average} = filme;
+                const url = poster_path
+                    ? `https://www.themoviedb.org/t/p/w220_and_h330_bestv2/${poster_path}`
+                    : img
                 let data = trataData(release_date || first_air_date)
 
                 return <NavLink key={id} to="/info" onClick={()=>salvaFilme(filme)} className={classes.navLink}>
                     <Card className={classes.card}>
-                        <img width="150" src={`https://www.themoviedb.org/t/p/w220_and_h330_bestv2/${poster_path}`} alt="poster" />
+                        <img width="150" src={url} alt="poster" />
                         <div className={classes.info}>
                             <p>{title || name}</p>
                             <div>
-                                <p>{data}</p>
+                                {(release_date || first_air_date) && <p>{data}</p>}
                                 <p className={classes.nota}>
                                     {vote_average > 6 && <StarBorderIcon color="secondary" />}
                                     <span>Nota: {vote_average}</span>
