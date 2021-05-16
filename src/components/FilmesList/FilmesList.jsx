@@ -54,10 +54,11 @@ const FilmesList = () => {
     const classes = useStyles();
     const contexto = useContext(FilmeContext);
     const salvaFilme = useInfoFilme(contexto)[1];
+    const filmes = contexto.filmes ? contexto.filmes.results : []
 
     return (
         <div className={classes.cardContainer}>
-            {contexto.filmes && contexto.filmes.results.map( filme => {
+            {filmes.length ? filmes.map( filme => {
                 const {title, name, release_date, first_air_date, id, poster_path, vote_average} = filme;
                 const url = poster_path
                     ? `https://www.themoviedb.org/t/p/w220_and_h330_bestv2/${poster_path}`
@@ -79,7 +80,7 @@ const FilmesList = () => {
                         </div>
                     </Card>
                 </NavLink>
-            })}
+            }) : <p>Nenhum resultado obtido</p>}
         </div>
     )
 }
