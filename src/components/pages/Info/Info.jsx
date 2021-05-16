@@ -46,7 +46,7 @@ const Info = () => {
     
     return infoFilme.filme ? <div className={classes.background} style={{backgroundImage: urlBackground}}>
         <Card className={classes.containerFilme}>
-            <img className={!poster_path && classes.imgDefault || classes.image} src={url} alt="poster" />
+            <img className={(!poster_path && classes.imgDefault) || classes.image} src={url} alt="poster" />
             <div className={classes.info}>
                 <div>
                     <h1>{title || name}</h1>

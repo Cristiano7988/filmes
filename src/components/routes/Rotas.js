@@ -8,15 +8,18 @@ import { useState } from "react";
 const Rotas = () => {
     const getFilmes = async () => {
         return await fetch(`https://api.themoviedb.org/3/trending/movies/week?api_key=ca93225bc497b838281c58ea1888314f`)
-            .then(r => r.json() ) 
-            .then(filmes => {
-                filmes.results.sort((a,b)=> b.vote_average - a.vote_average)
-                setFilmes(filmes);
-            });
+        .then(r => r.json() ) 
+        .then(filmes => {
+            filmes.results.sort((a,b)=> b.vote_average - a.vote_average)
+            setFilmes(filmes);
+        });
     }
     
     const handleChange = async (e) => {
         if(!e.target.value && getFilmes()) return;
+        if(window.location.pathname.includes('info')) {
+            window.location.pathname = '/'
+        }
 
         await fetch(`https://api.themoviedb.org/3/search/movie?query=${e.target.value}&api_key=ca93225bc497b838281c58ea1888314f`)
         .then( r => r.json())
