@@ -6,23 +6,29 @@ import useInfoFilme from "../../../hooks/usoInfo";
 import img from "../../../img/img-icon.png";
 
 const useStyles = makeStyles(theme => ({
-    containerFilme: {
-        display: 'inline-flex',
-        color: 'white',
-        margin: '50px',
-        backgroundSize: '75%',
+    background: {
+        backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center right'
+        margin: '50px',
+        borderRadius: '10px'
+    },
+    containerFilme: {
+        color: 'white',
+        display: 'flex',
+        backgroundColor: 'rgba(0, 0, 0, .8)'
     },
     info: {
         padding: '0 10px',
         display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: 'rgba(0, 0, 0, .8)'
+        flexDirection: 'column'
     },
     imgDefault: {
         height: '50%',
         alignSelf: 'center'
+    },
+    image: {
+        width: '30%',
+        height: '110%'
     }
 }))
 
@@ -38,9 +44,9 @@ const Info = () => {
         ? `url(https://www.themoviedb.org/t/p/w600_and_h900_bestv2${backdrop_path})`
         : 'none'
     
-    return infoFilme.filme ? <div>
-        <Card className={classes.containerFilme} style={{backgroundImage: urlBackground}}>
-            <img className={!poster_path && classes.imgDefault} src={url} alt="poster" />
+    return infoFilme.filme ? <div className={classes.background} style={{backgroundImage: urlBackground}}>
+        <Card className={classes.containerFilme}>
+            <img className={!poster_path && classes.imgDefault || classes.image} src={url} alt="poster" />
             <div className={classes.info}>
                 <div>
                     <h1>{title || name}</h1>
